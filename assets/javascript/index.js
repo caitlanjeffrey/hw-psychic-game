@@ -12,48 +12,39 @@ var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.l
 document.onkeyup = function(event) {
     var userGuess = event.key;
     userGuessSoFar.push(userGuess);
-    userGuessChoices.textContent = userGuessSoFar;
-    document.getElementById("userguess").innerHTML = "<p><strong>Guesses: " + guessSoFar + "</strong></p>";
+    
+    for (i = 0; i < userGuessSoFar.length; i++) {
+        document.getElementById("userguess").innerHTML = ("<p><strong>Letters Guessed: </strong></p>" + userGuessSoFar);
         console.log("User Guess: " + userGuess);
-
-    for (var j = 0; j < computerGuess.length; j++) {
-        if (computerGuess[j] == userGuess) {
-            userGuessSoFar[j] = userGuess;
-        };
     };
 
     if (userGuess === computerGuess) {
+        alert("You won this round...");
         wins++;
-        guessRemain = 9;
+        guessRemain = 9
         userGuessSoFar = [];
-        alert("You Won...This Time");
+        document.getElementById("wins").innerHTML = wins;
         resetgame();
     };
     
     if (userGuess !== computerGuess) {
         guessRemain--;
+        document.getElementById("guesses").innerHTML = guessRemain;
+        document.getElementById("userguess").innerHTML = ("<p><strong>Letters Guessed: </strong></p>" + userGuessSoFar);
         resetgame();
     };
     
     if (guessRemain < 1) {
         guessRemain = 9;
-        guessSoFar = [];
+        userGuessSoFar = [];
         losses++;
+        document.getElementById("losses").innerHTML = losses;
+        document.getElementById("guesses").innerHTML = guessRemain;
         resetgame();
-        document.getElementById("userguess").innerHTML = "<p><strong>Guesses: " + guessSoFar + "</strong></p>";
-        document.getElementById("guesses").innerHTML = "<p><strong>" + guessRemain + "</strong></p>";
     };
 };
 
 function resetgame() {
     computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     console.log("Computer Guess: " + computerGuess);
-    userGuessSoFar = [];
-    document.getElementById("userguess").innerHTML = guessSoFar;
 };
-
-var winPoints = document.getElementById("wins").innerHTML = "<p><strong>" + wins + "</strong></p>";
-var guessRemaining = document.getElementById("guesses").innerHTML = "<p><strong>" + guessRemain + "</strong></p>";
-var lossPoints = document.getElementById("losses").innerHTML = "<p><strong>" + losses + "</strong></p>";
-var userGuessChoices = document.getElementById("userguess").innerHTML = "<p><strong>Guesses: " + guessSoFar + "</strong></p>";
-var guessSoFar = document.getElementById("userguess").innerHTML = "<p><strong>Guesses: " + userGuessSoFar + "</strong></p>";
