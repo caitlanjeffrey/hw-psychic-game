@@ -6,44 +6,41 @@ var losses = 0;
 var guessRemain = 9; //total guesses per round
 var userGuessSoFar = []; //user choice array
 
-var userGuessChoices = document.getElementById("userguess");
-var winPoints = document.getElementById("wins");
-var guessRemaining = document.getElementById("guess");
-var lossPoints = document.getElementById("loss");
-var guessSoFar = document.getElementById("userguess");
-
 var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    console.log("Computer Guess: " + computerGuess);
 
-function updateDisplays() {
-    winPoints.textContent = wins;
-    guessRemaining.textContent = guessRemain;
-    lossPoints.textContent = losses;
-}
 document.onkeyup = function(event) {
     var userGuess = event.key;
     userGuessSoFar.push(userGuess);
     userGuessChoices.textContent = userGuessSoFar;
+        console.log("User Guess: " + userGuess);
 
-    if (userGuess == computerGuess) {
+    for (var j = 0; j < computerGuess.length; j++) {
+        if (computerGuess[j] == userGuess) {
+            userGuessSoFar[j] = userGuess;
+        };
+    };
+
+    if (userGuess === computerGuess) {
         wins++;
         guessRemain = 9;
         userGuessSoFar = [];
-        computerGuess = computerChoices[Math.floor(Math.random() * letters.length)];
-    }
+        alert("You Won...This Time");
+    };
 
-    else {
+    if (userGuess !== computerGuess) {
         guessRemain--;
+    };
+    
+    if (guessRemain < 1) {
+        guessRemain = 9;
+        guessSoFar = [];
+        losses++;
+    };
+};
 
-        if (guessRemain == 0) {
-            losses++;
-            userGuessSoFar = [];
-            guessRemain = 9;
-        }
-    }
-
-    updateDisplays();
-}
-updateDisplays();
-
-console.log(computerGuess);
-console.log(userGuessSoFar);
+var winPoints = document.getElementById("wins").innerHTML = "<p><strong>" + wins + "</strong></p>";
+var guessRemaining = document.getElementById("guesses").innerHTML = "<p><strong>" + guessRemain + "</strong></p>";
+var lossPoints = document.getElementById("losses").innerHTML = "<p><strong>" + losses + "</strong></p>";
+var userGuessChoices = document.getElementById("userguess").innerHTML = "<p><strong>Guesses: " + guessSoFar + "</strong></p>";
+var guessSoFar = document.getElementById("userguess").innerHTML = "<p><strong>Guesses: " + userGuessSoFar + "</strong></p>";
