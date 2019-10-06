@@ -1,0 +1,40 @@
+body {
+    background-color: purple;
+    font-size: 16px;
+}
+
+.my-4 {
+    color: white;
+
+}
+.jumbotron {
+    background-color: purple;
+    color: #F6F9FB;
+}
+
+.card-group {
+    margin: 0px 32px 0px 32px;
+    padding: 0px 15px 0px 15px;
+    background-color: transparent;
+}
+
+.card {
+    margin: 0px, 5px, 0px, 5px;
+    background-color: plum;
+    color: #F6F9FB
+}
+
+.card-title {
+    text-align: center;
+}
+
+.card-text {
+    text-align: center;
+}
+
+#footer {
+    color: #F6F9FB;
+    text-align: center;
+    padding: 5px;
+    margin: 15px 0 0 0;
+}
